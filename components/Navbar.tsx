@@ -6,10 +6,10 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menuItems = [
-    { label: 'Vehicles', href: '#vehicles' },
-    { label: 'Explore Astro', href: '#explore' },
-    { label: 'Contact Us', href: '#contact' },
-    { label: 'Global Partners', href: '#partners' }
+    { label: 'Vehicles', href: './Carousel.tsx' },
+    { label: 'Explore Astro', href: './ModelsSection.tsx' },
+    { label: 'Contact Us', href: './CTASection.tsx' },
+    { label: 'Global Partners', href: './Footer.tsx' }
   ];
 
   return (
