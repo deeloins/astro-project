@@ -5,12 +5,30 @@ import React, { useState } from 'react';
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // Use section IDs for anchor links
   const menuItems = [
-    { label: 'Vehicles', href: './Carousel.tsx' },
-    { label: 'Explore Astro', href: './ModelsSection.tsx' },
-    { label: 'Contact Us', href: './CTASection.tsx' },
-    { label: 'Global Partners', href: './Footer.tsx' }
+    { label: 'Vehicles', sectionId: 'vehicles' },
+    { label: 'Explore Astro', sectionId: 'explore' },
+    { label: 'Contact Us', sectionId: 'contact' },
+    { label: 'Global Partners', sectionId: 'partners' }
   ];
+
+  // Function to scroll to section and close menu
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsMenuOpen(false);
+  };
+
+  // Function to handle icon clicks (if they're also on the same page)
+  const scrollToIconSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <>
@@ -44,9 +62,15 @@ export default function Navbar() {
             </div>
           </button>
 
-          {/* Logo - Center */}
+          {/* Logo - Center - Scrolls to top */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
-            <a href="/" className="flex items-center gap-1 sm:gap-2">
+            <button 
+              onClick={() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                setIsMenuOpen(false);
+              }}
+              className="flex items-center gap-1 sm:gap-2"
+            >
               {/* Logo Image - Astro Logo */}
               <div className="relative w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8">
                 <img 
@@ -64,14 +88,14 @@ export default function Navbar() {
               }`} style={{ fontFamily: 'Nasalization, sans-serif' }}>
                 stro
               </span>
-            </a>
+            </button>
           </div>
 
           {/* Right Icons Group */}
           <div className="flex items-center gap-2 sm:gap-3 z-50">
             {/* Message Question Icon */}
-            <a 
-              href="/help"
+            <button 
+              onClick={() => scrollToIconSection('help')}
               className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 hover:bg-gray-50/10 rounded-lg transition-colors"
               aria-label="Help"
             >
@@ -82,11 +106,11 @@ export default function Navbar() {
                   isMenuOpen ? 'filter invert' : ''
                 }`}
               />
-            </a>
+            </button>
 
             {/* Global/Language Icon */}
-            <a 
-              href="/language"
+            <button 
+              onClick={() => scrollToIconSection('language')}
               className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 hover:bg-gray-50/10 rounded-lg transition-colors"
               aria-label="Language"
             >
@@ -97,11 +121,11 @@ export default function Navbar() {
                   isMenuOpen ? 'filter invert' : ''
                 }`}
               />
-            </a>
+            </button>
 
             {/* Location Icon */}
-            <a 
-              href="/locations"
+            <button 
+              onClick={() => scrollToIconSection('locations')}
               className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 hover:bg-gray-50/10 rounded-lg transition-colors"
               aria-label="Location"
             >
@@ -112,7 +136,7 @@ export default function Navbar() {
                   isMenuOpen ? 'filter invert' : ''
                 }`}
               />
-            </a>
+            </button>
           </div>
         </div>
       </nav>
@@ -136,11 +160,10 @@ export default function Navbar() {
           <div className="w-full px-6 sm:px-12 lg:px-[4.63%] py-20 sm:py-28 lg:py-[16.46%]">
             <nav className="space-y-5 sm:space-y-6">
               {menuItems.map((item, index) => (
-                <a
+                <button
                   key={index}
-                  href={item.href}
-                  className="flex items-center gap-4 sm:gap-6 group"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => scrollToSection(item.sectionId)}
+                  className="flex items-center gap-4 sm:gap-6 group w-full text-left"
                 >
                   <span className="text-xl sm:text-2xl lg:text-[25px] leading-6 sm:leading-7 lg:leading-[30px] tracking-[-0.02em] text-[#DBDBDB] font-normal transition-colors group-hover:text-white">
                     {item.label}
@@ -152,7 +175,7 @@ export default function Navbar() {
                     className="w-5 h-5 sm:w-6 sm:h-6 opacity-70 transition-all group-hover:translate-x-2 group-hover:opacity-100"
                     style={{ filter: 'invert(1)' }}
                   />
-                </a>
+                </button>
               ))}
             </nav>
           </div>

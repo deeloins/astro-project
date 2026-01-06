@@ -10,12 +10,21 @@ export default function Home() {
   return (
     <div className="w-full min-h-screen overflow-x-hidden">
       <Navbar />
-      <Carousel />
-      <CarouselTwo />
+        <Carousel />
+      <section id="vehicles">
+        <CarouselTwo />
+        </section>
       <MissionSection />
-      <ModelsSection />
-      <CTASection />
-      <Footer />
+      <section id="explore">
+        <ModelsSection />
+      </section>
+      <section id="contact">
+        <CTASection />
+      </section>
+       <section id="partners">
+        <Footer /> 
+      </section>
+      
     </div>
   );
 }
